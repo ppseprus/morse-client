@@ -4,7 +4,7 @@
   "description": "localhost chat app with Electron",
   "main": "index.js",
   "scripts": {
-    "prestart": "gulp build-js",
+    "prestart": "gulp build",
     "start": "electron main.js"
   },
   "repository": {
