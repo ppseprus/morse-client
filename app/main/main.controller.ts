@@ -4,15 +4,24 @@
 	'use strict';
 	angular
 		.module('morse')
-		.controller('mainController', ['$scope', '$state', 'socket',
-			function ($scope, $state, socket) {
+		.controller('mainController', ['$scope', '$state', 'socket', '$timeout',
+			function ($scope, $state, socket, $timeout) {
 				
 				socket.on('messages', function (data) {
-					$scope.messages.push({
-						dt: data.timestamp,
-						msg: data.message
-					});
-					$scope.users.push(data.name);
+					$timeout(function(){
+						$scope.messages.push({
+							dt: data.timestamp,
+							msg: data.message
+						});
+					})
+				});
+				
+				
+				socket.emit('join', 'ppseprus');
+				
+				socket.emit('messages', {
+					'timestamp': new Date(),
+					'message': 'testing 123...'
 				});
 				
 			}]);
