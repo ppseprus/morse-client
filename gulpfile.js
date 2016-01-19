@@ -3,7 +3,7 @@ var uglify = require('gulp-uglify');
 var ts = require('gulp-typescript');
 var sass = require('gulp-sass');
 
-gulp.task('build-js', function () {
+gulp.task('build-app', function () {
     return gulp
 		.src('./app/**/*.ts')
         .pipe(ts({
@@ -23,7 +23,7 @@ gulp.task('build-scss', function () {
         .pipe(gulp.dest('./build'));
 });
 
-gulp.task('build', ['build-js', 'build-scss'], function() {});
+gulp.task('build', ['build-app', 'build-scss'], function() {});
 
 
 gulp.task('default', [], function() {});
