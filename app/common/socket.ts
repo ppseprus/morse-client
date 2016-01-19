@@ -2,7 +2,6 @@
 
 (function(){
 	'use strict';
-	
 	angular
 		.module('morse')
 		.factory('socket', ['$rootScope', function($rootScope){

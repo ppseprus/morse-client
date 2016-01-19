@@ -1,4 +1,6 @@
-<ul id="messages"></ul>
+<ul id="messages">
+	<li ng-repeat="(dt,msg) in messages">{{dt}}: {{msg}}</li>
+</ul>
 <nav class="navbar navbar-default navbar-fixed-bottom">
 	<div class="container">
 		<form class="navbar-form navbar-left" role="submit">
