@@ -1,13 +1,34 @@
 <ul id="messages">
-	<li ng-repeat="(dt,msg) in messages">{{dt}}: {{msg}}</li>
+	<li ng-repeat="m in messages" class="{{::m.ev}}">
+		<span class="label label-info timestamp">{{::m.dt}}</span> <span class="label {{::(m.usr=='server')?'label-danger':'label-primary';}} username">{{::m.usr}}</span> <span class="message">{{::m.msg}}</span>
+	</li>
 </ul>
 <nav class="navbar navbar-default navbar-fixed-bottom">
 	<div class="container">
-		<form class="navbar-form navbar-left" role="submit">
+		<form
+			name="console"
+			class="navbar-form navbar-left"
+			ng-submit="sendMessage(console.$valid)">
+			
 			<div class="form-group">
-				<input type="text" class="form-control" id="message" placeholder="type your message here" autocomplete="off">
+				<input
+					type="text"
+					name="message"
+					class="form-control"
+					id="message"
+					placeholder="type your message here"
+					autocomplete="off"
+					ng-model="message"
+					ng-required="true"></input>
 			</div>
-			<button type="submit" class="btn btn-default" id="send">send</button>
+			
+			<button
+				type="submit"
+				name="submit"
+				class="btn btn-primary"
+				id="send"
+				ng-disabled="console.$invalid">send</button>
+				
 		</form>
 	</div>
 </nav>
