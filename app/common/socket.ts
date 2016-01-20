@@ -4,8 +4,8 @@
 	'use strict';
 	angular
 		.module('morse')
-		.factory('socket', ['$rootScope', function($rootScope){
-			var socket = io.connect('http://localhost:3000/');
+		.factory('socket', ['IO_CONFIG', '$rootScope', function(IO_CONFIG, $rootScope){
+			var socket = io.connect(IO_CONFIG.ip+':'+IO_CONFIG.port);
 			return {
 				
 				
