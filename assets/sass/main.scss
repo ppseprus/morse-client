@@ -1,0 +1,17 @@
+#messages {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#messages li {
+	padding: 1px 0px;
+}
+
+#messages .timestamp {
+	display: none;
+}
+
+#messages li:hover .timestamp {
+	display: inline-block;
+}
