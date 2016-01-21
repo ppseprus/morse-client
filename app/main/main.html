@@ -1,15 +1,18 @@
-<ul id="messages">
-	<li ng-repeat="m in messages" class="{{::m.ev}}">
-		<span class="label label-info timestamp">{{::m.dt}}</span> <span class="label {{::(m.usr=='server')?'label-danger':'label-primary';}} username">{{::m.usr}}</span> <span class="message">{{::m.msg}}</span>
-	</li>
-</ul>
-<nav class="navbar navbar-default navbar-fixed-bottom">
-	<div class="container">
+<div id="scroll-container">
+	<ul id="messages">
+		<li ng-repeat="m in messages" class="{{::m.ev}}">
+			<span class="label label-info timestamp">{{::m.dt}}</span> <span class="label {{::(m.usr=='server')?'label-danger':'label-primary';}} username">{{::m.usr}}</span> <span class="message">{{::m.msg}}</span>
+		</li>
+	</ul>
+</div>
+<nav
+	id="navbar"
+	class="navbar navbar-default navbar-fixed-bottom">
+	<div class="container-fluid">
 		<form
 			name="console"
 			class="navbar-form navbar-left"
 			ng-submit="sendMessage(console.$valid)">
-			
 			<div class="form-group">
 				<input
 					type="text"
@@ -19,16 +22,16 @@
 					placeholder="type your message here"
 					autocomplete="off"
 					ng-model="message"
-					ng-required="true"></input>
+					ng-required="true"
+					ng-disabled="!s.connected()"></input>
 			</div>
-			
 			<button
 				type="submit"
 				name="submit"
-				class="btn btn-primary"
+				class="btn btn-primary hidden-xs"
 				id="send"
-				ng-disabled="console.$invalid">send</button>
-				
+				ng-disabled="!s.connected() || console.$invalid">send</button>
 		</form>
 	</div>
 </nav>
+<a id="bottom"></a>

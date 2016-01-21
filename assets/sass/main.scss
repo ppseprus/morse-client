@@ -1,7 +1,25 @@
+@media screen and (max-width: 767px) {
+	.hidden-xs {
+		display:none;
+	}
+}
+
+#navbar .navbar-form {
+	padding-top: 0;
+	padding-bottom: 0;
+	border: 0;
+}
+
+#navbar .form-group {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
 #messages {
 	list-style-type: none;
-	padding: 0;
 	margin: 0;
+	padding: 0;
+	padding-bottom: 80px;	
 }
 
 #messages li {

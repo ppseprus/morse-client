@@ -4,10 +4,14 @@
 	'use strict';
 	angular
 		.module('morse')
-		.controller('mainController', ['$state', '$scope', 'socket', '$filter',
-			function ($state, $scope, socket, $filter) {
+		.controller('mainController', [
+			'$state', '$scope', '$filter', 'socketService', '$location', '$anchorScroll',
+			function ($state, $scope, $filter, socketService, $location, $anchorScroll) {
 				
-				//	initialise message container
+				$scope.username = 'ppseprus';
+				
+				$scope.s = socketService;
+				
 				$scope.messages = [];
 				
 				//	initialise logging
@@ -18,6 +22,9 @@
 						usr: data.username,
 						msg: data.message
 					});
+					
+					$location.hash('bottom');
+					$anchorScroll();
 				}
 				
 				//	select events to listen to
@@ -25,27 +32,33 @@
 					'user:connect': true,
 					'user:disconnect': true,
 					'user:join': true,
+					'youare': false,
 					'message': true
 				};
 				
 				//	initialise event listeners
 				angular.forEach(eventsToListen, function(value, e){
 					if(value) {
-						socket.on(e, function(data){
+						socketService.on(e, function(data){
 							logMessage(data);
 						});
+						
 					}
 				});
 				
 				//	TEMPORARY
-				socket.emit('user:join', {
-					'username':'ppseprus'
+				socketService.emit('user:join', {
+					'username': $scope.username
+				});
+				
+				socketService.on('youare', function(data){
+					$scope.username = data.message;
 				});
 				
 				//	message sending
 				$scope.sendMessage = function(isValid) {
 					if (isValid) {
-						socket.emit('message', {
+						socketService.emit('message', {
 							'timestamp': $filter('date')(new Date, 'HH:mm:ss.sss', 'UTC'),
 							'message': $scope.message
 						});
